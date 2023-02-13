@@ -28,3 +28,5 @@ print('Parametros extrinsecos:\n')
 print('R0\n', R0, '\n')
 print('T0\n', T0, '\n')
 print('Distorcao Radial:\n', dis0)
+
+def read_video(path):
