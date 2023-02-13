@@ -1,5 +1,6 @@
-import numpy as np
 import json
+
+import numpy as np
 
 
 # Function to read the intrinsic and extrinsic parameters of each camera

@@ -18,7 +18,6 @@ class VideoReader():
             else:
                 break
 
-
     def __getitem__(self, item: int):
         """
         Get the itemth frame from video
