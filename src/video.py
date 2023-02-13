@@ -1,28 +1,30 @@
 # Code made in Pycharm by Igor Varejao
 import cv2
 
+
 class VideoReader():
 
-    def __init__(self, path : str):
+    def __init__(self, path: str):
         self.video = cv2.VideoCapture(path)
         self.video_path = path
-        if (not self.video.isOpened()):
+        if not self.video.isOpened():
             raise FileNotFoundError(f"Error opening video : {path}")
 
     def __iter__(self):
-        while (self.video.isOpened()):
+        while self.video.isOpened():
             ret, frame = self.video.read()
             if ret:
                 yield frame
             else:
-                yield None
+                break
 
-    def __getitem__(self, item : int):
+
+    def __getitem__(self, item: int):
         """
         Get the itemth frame from video
         """
         count = 0
-        while (self.video.isOpened()):
+        while self.video.isOpened():
             ret, frame = self.video.read()
             if count == item:
                 if ret:

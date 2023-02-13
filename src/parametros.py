@@ -1,6 +1,7 @@
 import numpy as np
 import json
 
+
 # Function to read the intrinsic and extrinsic parameters of each camera
 def camera_parameters(file):
     camera_data = json.load(open(file))
@@ -11,22 +12,18 @@ def camera_parameters(file):
     R = tf[:3, :3]
     T = tf[:3, 3].reshape(3, 1)
     dis = np.array(camera_data['distortion']['doubles'])
-    return K, R, T, res, dis
+    return K, R, T, res, dis, tf
 
 
-#Load cameras parameters
-K0, R0, T0, res0, dis0 = camera_parameters('0.json')
-K1, R1, T1, res1, dis1 = camera_parameters('1.json')
-K2, R2, T2, res2, dis2 = camera_parameters('2.json')
-K3, R3, T3, res3, dis3 = camera_parameters('3.json')
+# Load cameras parameters
+K0, R0, T0, res0, dis0, tf0 = camera_parameters('../data/calib/0.json')
+K1, R1, T1, res1, dis1, tf1 = camera_parameters('../data/calib/1.json')
+K2, R2, T2, res2, dis2, tf2 = camera_parameters('../data/calib/2.json')
+K3, R3, T3, res3, dis3, tf3 = camera_parameters('../data/calib/3.json')
 
+pi = np.eye(3, 4)
 
-print('Camera 0\n')
-print('Resolucao',res0,'\n')
-print('Parametros intrinsecos:\n', K0, '\n')
-print('Parametros extrinsecos:\n')
-print('R0\n', R0, '\n')
-print('T0\n', T0, '\n')
-print('Distorcao Radial:\n', dis0)
-
-def read_video(path):
+P0 = np.dot(K0, np.dot(pi, tf0))
+P1 = np.dot(K1, np.dot(pi, tf1))
+P2 = np.dot(K2, np.dot(pi, tf2))
+P3 = np.dot(K3, np.dot(pi, tf3))
