@@ -2,10 +2,20 @@ import cv2
 import cv2.aruco as aruco
 import matplotlib.pyplot as plt
 import numpy as np
+from argparse import ArgumentParser
 
 from parametros import P0, P1, P2, P3
 from video import VideoReader
+import os
 
+def parse_args():
+    """
+    Faz a leitura dos argumentos
+    """
+    parser = ArgumentParser()
+    parser.add_argument("--data-path", help="O caminho onde se encontra os vídeos", required=True)
+    args = parser.parse_args()
+    return args
 
 def presentImage(centers, *args):
     f0, f1, f2, f3 = args
@@ -65,8 +75,11 @@ def createM(ps: np.ndarray, xs: np.ndarray) -> np.ndarray:
 
 
 def main():
-    v0, v1 = VideoReader("../data/videos/camera-00.mp4"), VideoReader("../data/videos/camera-01.mp4")
-    v2, v3 = VideoReader("../data/videos/camera-02.mp4"), VideoReader("../data/videos/camera-03.mp4")
+    args = parse_args()
+    DATA_PATH = args.data_path
+
+    v0, v1 = VideoReader(os.path.join(DATA_PATH, "camera-00.mp4")), VideoReader(os.path.join(DATA_PATH, "camera-01.mp4"))
+    v2, v3 = VideoReader(os.path.join(DATA_PATH, "camera-02.mp4")), VideoReader(os.path.join(DATA_PATH, "camera-03.mp4"))
 
     cv2.namedWindow('Video', cv2.WINDOW_AUTOSIZE | cv2.WINDOW_KEEPRATIO | cv2.WINDOW_GUI_NORMAL)
 

@@ -1,22 +1,25 @@
 # Code made in Pycharm by Igor Varejao
 import cv2
 
-
 class VideoReader():
 
     def __init__(self, path: str):
         self.video = cv2.VideoCapture(path)
-        self.video_path = path
-        if not self.video.isOpened():
+        if (not self.video.isOpened()):
             raise FileNotFoundError(f"Error opening video : {path}")
+        self.video_path = path
+        width = self.video.get(cv2.CAP_PROP_FRAME_WIDTH)
+        height = self.video.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        self.size = (height, width)
+        self.fps = self.video.get(cv2.CAP_PROP_FPS)
+
+    def __len__(self):
+        return self.video.get(cv2.CAP_PROP_FRAME_COUNT)
 
     def __iter__(self):
         while self.video.isOpened():
             ret, frame = self.video.read()
-            if ret:
-                yield frame
-            else:
-                break
+            yield frame if ret else None
 
     def __getitem__(self, item: int):
         """
