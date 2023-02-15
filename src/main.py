@@ -123,7 +123,7 @@ def main():
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
     ax.set_xlim(-2.0, 2.0)
-    ax.set_ylim(-1.0, 1.0)
+    ax.set_ylim(-2.0, 2.0)
     ax.set_zlim(0, 1.0)
     plt.show()
 
