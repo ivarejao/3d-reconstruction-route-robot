@@ -89,6 +89,9 @@ def main():
     arucoPositions = []
 
     for f0, f1, f2, f3 in zip(v0, v1, v2, v3):
+        if f0 is None or f1 is None or f2 is None or f3 is None:
+            break
+
         centers = [findCenterPixelAruco(f0, arucoDetecter), findCenterPixelAruco(f1, arucoDetecter),
                    findCenterPixelAruco(f2, arucoDetecter), findCenterPixelAruco(f3, arucoDetecter)
                    ]
