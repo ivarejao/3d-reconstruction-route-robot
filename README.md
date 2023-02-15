@@ -13,11 +13,13 @@ Para executar o script é preciso ter as seguintes versões das biblioetcas:
 ```python
 - opencv-contrib-python==4.7.0.68
 - opencv-python==4.7.0.68
+- matplotlib
 ```
 Ambas especificadas em `requirements.txt`
 
 Para executar o programa basta especificar o caminho dos vídeos na hora de executar o programa pelo argumento
 `--data-path`
+
 **OBS:** É importante especificar o caminho dos dados com relação a onde está sendo chamado o programa.
 ```bash
 python3 main.py --data-path ../data/videos
